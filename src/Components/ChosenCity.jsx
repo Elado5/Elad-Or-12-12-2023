@@ -38,39 +38,41 @@ const ChosenCity = () => {
 
     useEffect(() => {
         console.log('function set off');
-        LookupAndSetLocation({label: "Tel Aviv - Israel", key: '215854'}, dispatch);
+        LookupAndSetLocation({ label: "Tel Aviv - Israel", key: '215854' }, dispatch);
 
-    
-      return () => {
-      }
     }, [])
-    
+
 
     const CardStyle = styled.div`
-    display: grid;
+    display: flex;
     justify-content: center;
     justify-items: center;
     text-align: center;
+    width: 100%;
     .MuiCardMedia-img{
             object-fit: cover;
             display:inline;
             width: auto;
         }
-        }
+        
     .MuiCardActions-root{
             justify-content: center;
+            width: 100%;
+        }
+    .MuiCard-Root{
+            width: 100%;
         }
     `
 
     return (
         <CardStyle>
-            <Card sx={{ maxWidth: 400 }}>
+            <Card sx={{ maxWidth: 1200, width: '100%' }}>
                 <CardContent>
                     <Typography variant="h3" color="text.secondary">
                         {name}
                     </Typography>
                     <Typography gutterBottom variant="h3" component="div" justifySelf="center">
-                        {temperatureFormat=="Celsius" ? tempC : tempF}°
+                        {temperatureFormat == "Celsius" ? tempC : tempF}°
                     </Typography>
                     <CardMedia
                         component="img"
@@ -85,7 +87,7 @@ const ChosenCity = () => {
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <IconButton aria-label="Favorites" >{isFavorite() ? <FavoriteIcon /> : <FavoriteBorderIcon/>}</IconButton>
+                    <IconButton aria-label="Favorites" >{isFavorite() ? <FavoriteIcon /> : <FavoriteBorderIcon />}</IconButton>
                 </CardActions>
             </Card>
         </CardStyle>)

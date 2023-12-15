@@ -2,7 +2,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
 import { useSelector } from 'react-redux';
 import { convertToFahrenheit} from '../utils/GeneralFuncs';
 
@@ -18,19 +18,28 @@ const Forecast = () => {
 
     const CardGroup = styled.div`
         display: flex;
+        flex-wrap: wrap;
         flex-direction: row;
         margin-top: 2.5%;
         @media screen and (max-width: 1024px)
         {
-    flex: 0 0 50%;
-    }
+            #forecast4{
+                width: 100% !important;
+                color:red;
+            }
+        }
     `
     const CardStyle = styled.div`
         display: flex;
         justify-content: center;
         justify-items: center;
         text-align: center;
-        width: 100%;
+        width: 20%;
+
+        @media screen and (max-width: 1024px)
+        {
+            width: 50%;
+    }
     .MuiCardMedia-img{
             display:inline;
             width: auto;
@@ -49,8 +58,8 @@ const Forecast = () => {
             {
                 forecast.map((item, key) => {
                     return ( 
-                    <CardStyle key={key}>
-                        <Card >
+                    <CardStyle key={key} id={`forecast${key}`}>
+                        <Card>
                             <CardContent>
                                 <Typography variant="h3" color="text.secondary">
                                     {getDayName(item?.Date)}
