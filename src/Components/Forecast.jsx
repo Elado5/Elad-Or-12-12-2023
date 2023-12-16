@@ -21,6 +21,8 @@ const Forecast = () => {
         flex-wrap: wrap;
         flex-direction: row;
         margin-top: 2.5%;
+        justify-content: space-between;
+        
         @media screen and (max-width: 1024px)
         {
             #forecast4{
@@ -34,7 +36,7 @@ const Forecast = () => {
         justify-content: center;
         justify-items: center;
         text-align: center;
-        width: 20%;
+        width: 19.5%;
 
         @media screen and (max-width: 1024px)
         {

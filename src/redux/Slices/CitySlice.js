@@ -11,7 +11,6 @@ export const citySlice = createSlice({
         sky: "Sunny",
         icon: 1,
         forecast:[],
-        favorites:[]
     },
     reducers: {
         setChosenCity: (state, action) => {

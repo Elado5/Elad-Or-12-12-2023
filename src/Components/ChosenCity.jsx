@@ -8,40 +8,76 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import styled from '@emotion/styled'
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
-import { LookupAndSetLocation } from './Search';
+import { useEffect, useState } from 'react';
+import { lookupAndSetLocation } from './Search';
+//import { addToFavorites, removeFromFavorites } from '../redux/Slices/FavoritesSlice';
 
 
 
 const ChosenCity = () => {
 
     const dispatch = useDispatch();
+    const city = useSelector(state => state.city);
     const name = useSelector(state => state.city.name);
     const key = useSelector(state => state.city.key);
     const tempF = useSelector(state => state.city.tempF);
     const tempC = useSelector(state => state.city.tempC);
     const sky = useSelector(state => state.city.sky);
     const icon = useSelector(state => state.city.icon);
-    const favorites = useSelector(state => state.city.favorites);
+    //const favorites = useSelector(state => state.favorites.favorites);
     const temperatureFormat = useSelector(state => state.tempType.value);
+    const [currentlyFavorite, setCurrentlyFavorite] = useState(false);
 
-    const isFavorite = () => {
-        let result = false;
-        favorites.forEach(item => {
-            if (item?.key == key) {
-                result = true;
-            }
+
+    // const isFavorite = () => {
+    //     let result = false;
+    //     favorites.forEach(item => {
+    //         if (item.key == key) {
+    //             result = true;
+    //         }
+    //     }
+    //     );
+    //     return result;
+    // }
+
+    const isFavoriteLocal = (key) => {
+        if (localStorage.getItem(key) !== null){
+            setCurrentlyFavorite(true);
+            return true;
         }
-        );
-        return result;
+        else {
+            setCurrentlyFavorite(false);
+            return false;
+        }
+    }
+
+    const addToFavoritesLocal = (key, city) => {
+        if(localStorage.length < 5){
+            localStorage.setItem(key, JSON.stringify(city));
+            setCurrentlyFavorite(true);
+        }
+        else{
+            console.log('Max amount of favorites is 5');
+        }
+    }
+
+    const removeFromFavoritesLocal = (key) => {
+        localStorage.removeItem(key);
+        setCurrentlyFavorite(false);
+        console.log('localStorage.getItem(key)', localStorage.getItem(key));
     }
 
     useEffect(() => {
         console.log('function set off');
-        LookupAndSetLocation({ label: "Tel Aviv - Israel", key: '215854' }, dispatch);
-
+        lookupAndSetLocation({ label: "Tel Aviv - Israel", key: '215854' }, dispatch);
+        isFavoriteLocal(key);
     }, [])
 
+    //For when the current city changes (by key) - check if it's a favorite city
+    useEffect(() => {
+        console.log('function set off 2');
+        isFavoriteLocal(key);
+    }, [key])
 
     const CardStyle = styled.div`
     display: flex;
@@ -87,7 +123,9 @@ const ChosenCity = () => {
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <IconButton aria-label="Favorites" >{isFavorite() ? <FavoriteIcon /> : <FavoriteBorderIcon />}</IconButton>
+                    {currentlyFavorite ?
+                        <IconButton aria-label="Favorites" onClick={() => removeFromFavoritesLocal(key)}> <FavoriteIcon /> </IconButton>
+                        : <IconButton aria-label="Favorites" onClick={() => addToFavoritesLocal(key, city)} ><FavoriteBorderIcon /></IconButton>}
                 </CardActions>
             </Card>
         </CardStyle>)
