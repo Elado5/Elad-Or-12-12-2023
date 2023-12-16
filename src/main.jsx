@@ -12,25 +12,23 @@ import {
 // import '@fontsource/roboto/700.css';
 //redux
 import store from './redux/store.js'
-import { Provider} from 'react-redux'
+import { Provider } from 'react-redux'
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App/>,
+    element: <App />,
   },
-]);
-
-const router2 = createBrowserRouter([
   {
-    path: "/favorites",
-    element: <Favorites/>
+    path: "favorites",
+    element: <>
+      <Favorites />
+    </>
   }
-])
+]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <RouterProvider router={router} />
-    <RouterProvider router={router2} />
   </Provider>
 )
