@@ -42,13 +42,18 @@ const HeroCard = () => {
     const favorites = useSelector(state => state.favorites);
     const temperatureFormat = useSelector(state => state.tempType.value);
 
-
     // b
     const isCurrentCityFavorite = useMemo(() => Boolean((favorites || []).find(fav => fav.key === city.key)), [favorites, city]);
 
     // you Dont need this
     useEffect(() => {
+        if ("geolocation" in navigator) {
+            //add setHeroCity by geolocation here
+        }
+        else{
         setHeroCity({ label: "Tel Aviv - Israel", key: '215854' }, dispatch);
+        }
+        //SetHeroCity
         // isFavoriteLocal(key);
     }, [dispatch])
 

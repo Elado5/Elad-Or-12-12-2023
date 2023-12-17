@@ -32,7 +32,7 @@ const CitySearch = () => {
 
     )), [locationsData])
 
-    //change name to something that anyone can understand
+    //!change name to something that anyone can understand
     //? using useCallback so this function gets reallocated in memory only when the dependancy array (value in this case) changes
     const lookupLocation = useCallback(async () => {
         if (!value)
