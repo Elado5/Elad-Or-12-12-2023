@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import Favorites from './Pages/Favorites.jsx';
+import MainPage from './Pages/MainPage.jsx'
+import FavoritesPage from './Pages/FavoritesPage.jsx';
 import './index.css'
 import {
   createBrowserRouter,
@@ -10,19 +10,18 @@ import {
 // import '@fontsource/roboto/400.css';
 // import '@fontsource/roboto/500.css';
 // import '@fontsource/roboto/700.css';
-//redux
-import store from './redux/store.js'
-import { Provider } from 'react-redux'
+import store from './redux/store.js';
+import { Provider } from 'react-redux';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <MainPage />,
   },
   {
-    path: "favorites",
+    path: "/favorites",
     element: <>
-      <Favorites />
+      <FavoritesPage />
     </>
   }
 ]);

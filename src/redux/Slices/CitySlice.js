@@ -4,41 +4,28 @@ export const citySlice = createSlice({
 
     name: "city",
     initialState: {
-        name: "Tel Aviv",
+        name: "Loading...",
         key: "215854",
-        tempF: "100",
-        tempC: "32",
-        sky: "Sunny",
-        icon: 1,
+        tempF: "0",
+        tempC: "0",
+        sky: "Loading Weather...",
+        icon: 4,
         forecast:[],
     },
     reducers: {
         setChosenCity: (state, action) => {
-            console.log('action.payload => ', action.payload)
-            //state.name = action.payload.name;
             state.tempF = action.payload.Temperature.Imperial.Value;
             state.tempC = action.payload.Temperature.Metric.Value;
             state.sky = action.payload.WeatherText;
             state.icon = action.payload.WeatherIcon;
-            //forecast goes here
         },
         setChosenCityNameAndKey: (state, action) => {
-            console.log('action.payload => ', action.payload)
             state.name = action.payload.label;
             state.key = action.payload.key;
         },
         setForecast: (state,action) => {
-            console.log('action.payload', action.payload)
             state.forecast = action.payload;
         },
-        addToFavorites: (state, action) => {
-            state;
-            action;
-        },
-        removeFromFavorites: (state, action) => {
-            state;
-            action;
-        }
     }
 
 })

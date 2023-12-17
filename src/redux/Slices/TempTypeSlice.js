@@ -8,7 +8,6 @@ export const TempTypeSlice = createSlice({
     },
     reducers: {
         switchTempType: state => {
-            console.log('state.value', state.value)
             state.value == "Celsius" ? state.value="Fahrenhite" : state.value="Celsius";
         }
     }

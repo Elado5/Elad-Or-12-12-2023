@@ -1,12 +1,14 @@
-import './App.css'
-import Header from './Components/Header';
-import CitySearch from './Components/Search';
-import HeroCard from './Components/HeroCard';
-import Forecast from './Components/Forecast';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import './MainPage.css'
+import Header from '../Components/Header';
+import CitySearch from '../Components/Search';
+import HeroCard from '../Components/HeroCard';
+import Forecast from '../Components/Forecast';
 import { useSelector } from 'react-redux';
 
-function App () {
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+
+
+function MainPage () {
 
   const mode = useSelector(state => state.theme.value);
 
@@ -15,7 +17,6 @@ function App () {
       mode: mode,
     },
   });
-  
 
   return (
     <>
@@ -29,4 +30,4 @@ function App () {
   )
 }
 
-export default App
+export default MainPage

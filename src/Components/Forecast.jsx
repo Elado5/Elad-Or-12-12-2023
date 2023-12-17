@@ -27,11 +27,10 @@ const Forecast = () => {
         {
             #forecast4{
                 width: 100% !important;
-                color:red;
             }
         }
     `
-    const CardStyle = styled.div`
+    const StyledForecastCard = styled(Card)`
         display: flex;
         justify-content: center;
         justify-items: center;
@@ -60,10 +59,9 @@ const Forecast = () => {
             {
                 forecast.map((item, key) => {
                     return ( 
-                    <CardStyle key={key} id={`forecast${key}`}>
-                        <Card>
+                    <StyledForecastCard key={key} id={`forecast${key}`}>
                             <CardContent>
-                                <Typography variant="h3" color="text.secondary">
+                                <Typography variant="h5" color="text.secondary">
                                     {getDayName(item?.Date)}
                                 </Typography>
                                 <Typography gutterBottom variant="h4" component="div" justifySelf="center">
@@ -82,8 +80,7 @@ const Forecast = () => {
                                     {item?.Day?.IconPhrase}
                                 </Typography>
                             </CardContent>
-                        </Card>
-                    </CardStyle>
+                    </StyledForecastCard>
                     )
                 })
             }

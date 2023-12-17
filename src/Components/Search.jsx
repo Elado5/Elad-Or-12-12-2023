@@ -1,31 +1,16 @@
 import { useCallback, useMemo, useState } from 'react';
 import { TextField } from "@mui/material";
 import Autocomplete, { } from "@mui/material/Autocomplete";
-import { getSearchResults, getCurrentConditions, getFiveDaysForecast } from '../services/api';
+import { getSearchResults} from '../services/api';
 import { isEnglish } from '../utils/alphabet';
 import styled from '@emotion/styled'
 import { useDispatch } from 'react-redux';
-import { setChosenCity, setChosenCityNameAndKey, setForecast } from '../redux/Slices/CitySlice';
 import { useDebounce } from 'react-use';
+import { setHeroCity } from '../utils/Funcs';
 //import toast
-//get the weather api options inside the array
 
-export const setHeroCity = async (location, dispatch) => {
-    try {
-        const res = await getCurrentConditions(location.key);
-        console.log(res.data[0]);
-        //action update Chosen city
-        dispatch(setChosenCity(res.data[0]));
-        dispatch(setChosenCityNameAndKey(location));
-        
-        const res2 = await getFiveDaysForecast(location.key);
-        console.log("res2 ===> ", res2.data);
-        dispatch(setForecast(res2.data.DailyForecasts));
-        
-    }
-    catch (e) { console.log('error:', e.message) }
-}
-    const SearchStyle = styled.div`
+
+const SearchStyle = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
@@ -41,7 +26,7 @@ const CitySearch = () => {
 
     const [value, setValue] = useState(null);
     const [locationsData, setLocationsData] = useState([]);
-    
+
     const options = useMemo(() => locationsData.map((item) => (
         { label: `${item.LocalizedName} - ${item.Country.LocalizedName}`, key: `${item.Key}` }
 
@@ -54,7 +39,6 @@ const CitySearch = () => {
             return;
         try {
             const res = await getSearchResults(value);
-            console.log(res);
             setLocationsData([...res.data]);
         }
         catch (e) { console.log('error:', e.message) }
@@ -62,24 +46,25 @@ const CitySearch = () => {
 
 
     const lookupAndSetLocation = useCallback(async (location) => {
-        console.log('textInput', location)
-        if (!location){
+        if (!location) {
             return;
         }
 
         dispatch(setHeroCity(location, dispatch))
-    },[dispatch]);
+    }, [dispatch]);
 
     useDebounce(lookupLocation, 500, [value])
 
     const onInputChange = useCallback((event, inputValue) => {
         if (inputValue !== value && isEnglish(inputValue)) {
-                setValue(inputValue);
-            }
-                //TODO toast here
-                console.log('please use english letters only');
+            setValue(inputValue);
         }
-    , [value])
+        //TODO toast here
+        else{
+        console.log('please use english letters only');
+        }
+    }
+        , [value])
 
     const optionLabel = useCallback((option) => {
         if (typeof option === 'string') {
@@ -87,15 +72,15 @@ const CitySearch = () => {
         }
         // Regular option
         return option.label;
-    },[])
+    }, [])
 
-    const onSelectCity = useCallback((e,inputValue) => lookupAndSetLocation(inputValue),[lookupAndSetLocation])
+    const onSelectCity = useCallback((e, inputValue) => lookupAndSetLocation(inputValue), [lookupAndSetLocation])
 
     return (
         <SearchStyle>
             <Autocomplete
                 value={value}
-                onInputChange= {onInputChange}
+                onInputChange={onInputChange}
                 onChange={onSelectCity}
                 handleHomeEndKeys
                 id="autocomplete-search"
