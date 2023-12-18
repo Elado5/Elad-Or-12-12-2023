@@ -20,7 +20,7 @@ justify-content: center;
 justify-items: center;
 text-align: center;
 width: 18%;
-    background-image: url('./src/assets/png/clouds_img_semi_trans.png');
+    background-image: url('https://i.ibb.co/3hQsK0n/clouds-img-semi-trans.png');
     background-repeat: no-repeat;
     background-size: 250%;
     background-position: center;
@@ -64,7 +64,7 @@ const Favorite = (city) => {
 
         <StyledFavoriteCard id={`forecast${city.id}`}>
 
-            <CardContent onClick={handleClick}>
+            <CardContent onClick={handleClick} sx={{"&:hover":{cursor:"pointer"}}}>
                 <Typography gutterBottom variant="h6" color="text.secondary">
                     {name}
                 </Typography>

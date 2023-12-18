@@ -91,7 +91,7 @@ const HeroCard = () => {
             <StyledHeroCard p={24} sx={{
                 maxWidth: 1200,
                 width: '100%',
-                backgroundImage: "url('./src/assets/png/clouds_img_semi_trans.png')",
+                backgroundImage: "url('https://i.ibb.co/3hQsK0n/clouds-img-semi-trans.png')",
                 backgroundRepeat: 'no-repeat',
                 backgroundSize: '165%',
                 backgroundPosition: 'center'
