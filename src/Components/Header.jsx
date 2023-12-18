@@ -35,7 +35,7 @@ const Header = () => {
         <HeaderStyle>
             <AppBar position="static">
                 <Toolbar>
-                    <img type="image/svg+xml" src="../src/assets/svg/b_1_partly_cloudy.svg" width="50px" height="50px"></img>
+                    <img type="image/svg+xml" src="https://svgur.com/i/10z1.svg" width="50px" height="50px"></img>
                     <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
                         Abra Weather
                     </Typography>

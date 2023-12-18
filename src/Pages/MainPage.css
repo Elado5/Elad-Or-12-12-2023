@@ -2,4 +2,7 @@ body{
     background-image: url('../assets//png/clouds_bg.png');
     background-repeat: no-repeat;
     background-position: top;
+    @media screen and (min-height: 1441px){
+        background-size: 350%;
+    }
 }

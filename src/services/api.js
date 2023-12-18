@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiURL = "https://dataservice.accuweather.com/";
-const apiKey = '7OFmMfLLrCVq1cGjBWwo50xrGGTVdGbA';
+const apiKey = 'zsUUAvIjkQ3Yej216lfEuMeo6OXJKb7c';
 
 export const getSearchResults = (q) => {
     return axios.get(
