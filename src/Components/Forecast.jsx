@@ -20,7 +20,7 @@ const Forecast = () => {
         display: flex;
         flex-wrap: wrap;
         flex-direction: row;
-        margin-top: 2.5%;
+        margin-top: 1.1%;
         justify-content: space-between;
         
         @media screen and (max-width: 1024px)

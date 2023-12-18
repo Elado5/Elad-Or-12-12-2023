@@ -5,12 +5,13 @@ import ThemeSlider from './SubComponents/ThemeSlider';
 import { useSelector, useDispatch } from 'react-redux';
 import { switchTempType } from '../redux/Slices/TempTypeSlice';
 import styled from '@emotion/styled';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 const Header = () => {
 
     const HeaderStyle = styled.div`
+        opacity: 0.95;
         .MuiStack-root{
             display: flex;
             flex-direction: row;
@@ -27,6 +28,9 @@ const Header = () => {
     const dispatch = useDispatch();
     const temperatureFormat = useSelector(state => state.tempType.value);
 
+    let navigate = useNavigate();
+
+
     return (
         <HeaderStyle>
             <AppBar position="static">
@@ -36,13 +40,9 @@ const Header = () => {
                         Abra Weather
                     </Typography>
                     <Stack direction='row' spacing={1}>
-                        <Link to={"/"}>
-                            <Button aria-label="Home Page" color={'inherit'}><Home /></Button>
-                        </Link>
-                        <Link to="/favorites">
-                            <Button aria-label="Favorites" color={'inherit'}><FavoriteIcon /></Button>
-                        </Link>
-                        <Button aria-label="Temperature Format" color={'inherit'} onClick={() => dispatch(switchTempType())}>{temperatureFormat == "Celsius" ? "C" : "F"}</Button>
+                            <Button onClick={() => navigate("/")} aria-label="Home Page"  ><Home sx={{color:'white', width:'1em', height:'1em'}}/></Button>
+                            <Button onClick={() => navigate("/favorites")} aria-label="Favorites" ><FavoriteIcon sx={{color:'white', width:'1em', height:'1em'}}/></Button>
+                        <Button aria-label="Temperature Format" sx={{color:'white', fontSize:'1.25em'}} onClick={() => dispatch(switchTempType())}>{temperatureFormat == "Celsius" ? "C" : "F"}</Button>
                         <ThemeSlider />
                     </Stack>
                 </Toolbar>

@@ -16,6 +16,13 @@ function MainPage () {
     palette: {
       mode: mode,
     },
+    typography: {
+      fontFamily: [
+          'Roboto',
+          'sans-serif',
+          'Arial'
+      ].join(','),
+  }
   });
 
   return (

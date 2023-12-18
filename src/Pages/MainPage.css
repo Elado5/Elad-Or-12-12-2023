@@ -1,1 +1,5 @@
-body{background: rgb(80, 80, 176);}
+body{
+    background-image: url('../assets//png/clouds_bg.png');
+    background-repeat: no-repeat;
+    background-position: top;
+}

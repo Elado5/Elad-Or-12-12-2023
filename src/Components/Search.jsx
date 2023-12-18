@@ -4,9 +4,10 @@ import Autocomplete, { } from "@mui/material/Autocomplete";
 import { getSearchResults} from '../services/api';
 import { isEnglish } from '../utils/alphabet';
 import styled from '@emotion/styled'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useDebounce } from 'react-use';
 import { setHeroCity } from '../utils/Funcs';
+import { errorToast } from '../utils/Toasts';
 //import toast
 
 
@@ -23,6 +24,7 @@ const SearchStyle = styled.div`
 const CitySearch = () => {
 
     const dispatch = useDispatch();
+    const theme = useSelector(state => state.theme.value);
 
     const [value, setValue] = useState(null);
     const [locationsData, setLocationsData] = useState([]);
@@ -33,7 +35,7 @@ const CitySearch = () => {
     )), [locationsData])
 
     //!change name to something that anyone can understand
-    //? using useCallback so this function gets reallocated in memory only when the dependancy array (value in this case) changes
+    //? using useCallback so this function gets reallocated in memory only when the dependancy array changes
     const lookupLocation = useCallback(async () => {
         if (!value)
             return;
@@ -41,30 +43,28 @@ const CitySearch = () => {
             const res = await getSearchResults(value);
             setLocationsData([...res.data]);
         }
-        catch (e) { console.log('error:', e.message) }
-    }, [value])
+        catch (error) {  errorToast(error.message, theme) }
+    }, [value, theme])
 
 
     const lookupAndSetLocation = useCallback(async (location) => {
         if (!location) {
             return;
         }
-
-        dispatch(setHeroCity(location, dispatch))
-    }, [dispatch]);
+        dispatch(setHeroCity(location, dispatch, theme))
+    }, [dispatch, theme]);
 
     useDebounce(lookupLocation, 500, [value])
 
     const onInputChange = useCallback((event, inputValue) => {
-        if (inputValue !== value && isEnglish(inputValue)) {
+        if (inputValue !== value && isEnglish(inputValue) && inputValue?.label !== value) {
             setValue(inputValue);
         }
-        //TODO toast here
         else{
-        console.log('please use english letters only');
+            errorToast('please use english letters only', theme)
         }
     }
-        , [value])
+        , [value,theme])
 
     const optionLabel = useCallback((option) => {
         if (typeof option === 'string') {
@@ -86,6 +86,7 @@ const CitySearch = () => {
                 id="autocomplete-search"
                 options={options}
                 getOptionLabel={optionLabel}
+                sx={{    background: 'rgba(0,0,0,0.15)'}}
                 renderOption={(props, option) => <li {...props}>{option.label}</li>}
                 renderInput={(params) => (
                     <TextField {...params} label="City Search" />

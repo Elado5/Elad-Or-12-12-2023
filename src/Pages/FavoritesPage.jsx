@@ -10,6 +10,13 @@ const FavoritesPage = () => {
         palette: {
             mode: mode,
         },
+        typography: {
+            fontFamily: [
+                'Roboto',
+                'sans-serif',
+                'Arial'
+            ]
+        }
     });
 
     return (

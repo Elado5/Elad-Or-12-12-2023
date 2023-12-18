@@ -5,7 +5,7 @@ export const citySlice = createSlice({
     name: "city",
     initialState: {
         name: "Loading...",
-        key: "215854",
+        key: "0",
         tempF: "0",
         tempC: "0",
         sky: "Loading Weather...",

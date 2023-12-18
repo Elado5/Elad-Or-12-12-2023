@@ -25,7 +25,6 @@ const Favorites = () => {
         <CardGroup>
             {
                 favorites?.map((data, index) => {
-                    console.log('index', index)
                     return (
                         <Favorite city={data} id={index} key={data.key}/>
                     )
