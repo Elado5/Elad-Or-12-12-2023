@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const apiURL = "http://dataservice.accuweather.com/";
+const apiURL = "https://dataservice.accuweather.com/";
 const apiKey = '7OFmMfLLrCVq1cGjBWwo50xrGGTVdGbA';
 
 export const getSearchResults = (q) => {
